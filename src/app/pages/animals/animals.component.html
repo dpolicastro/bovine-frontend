@@ -1,0 +1,49 @@
+<div class="mt-3">
+  <h3>Available
+    <button (click)="getContract(template)" class="btn btn-success float-right mb-3">
+      Checkout
+    </button>
+
+  </h3>
+  <table class="table table-striped">
+    <tr>
+      <th>RFID</th>
+      <th>Weight</th>
+      <th>Scale</th>
+      <th>Status</th>
+      <th>Info</th>
+      <th>Add</th>
+    </tr>
+    <tr *ngFor="let animal of animals;let i = index;">
+      <td>{{animal.rfid}}</td>
+      <td>{{animal.weight}}</td>
+      <td>{{animal.scale}}</td>
+      <td>{{animal.status}}</td>
+      <td></td>
+      <td>
+        <input class="form-control" type="checkbox" name="options" value="animal" [(ngModel)]="animals[i].checked" />
+      </td>
+    </tr>
+  </table>
+</div>
+
+<ng-template #template>
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Contract Created</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      From: {{ transaction.farm }}
+      <hr>
+      To: {{ transaction.fridge }}
+      <hr>
+      Animals: {{ transaction.animals | json}}
+      <hr>
+      TxId: {{ transaction.transactionId }}
+    </div>
+  </div>
+
+</ng-template>
