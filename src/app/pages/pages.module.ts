@@ -8,6 +8,8 @@ import { PagesServiceService } from './pages-service.service';
 import { FormsModule } from '@angular/forms'
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AnimalsModalComponent } from './animals-modal/animals-modal.component';
+import { ContractsComponent } from './contracts/contracts.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { AnimalsModalComponent } from './animals-modal/animals-modal.component';
   declarations: [
     AnimalsComponent,
     PagesComponent,
-    AnimalsModalComponent
+    AnimalsModalComponent,
+    ContractsComponent,
+    AdminComponent
   ],
   providers: [
     PagesServiceService

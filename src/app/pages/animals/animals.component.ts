@@ -10,15 +10,20 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 export class AnimalsComponent implements OnInit {
 
   animals;
+  allAnimals;
   modalRef: BsModalRef;
   transaction;
+  listingSold: boolean = false;
   constructor(private pagesService: PagesServiceService, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.pagesService.getAnimals().subscribe(
       res => {
         console.log(res)
-        this.animals = res;
+        this.allAnimals = res;
+        this.animals = this.allAnimals.filter(animal => {
+          return animal.status === 'FOR_SALE'
+        })
       }
     )
   }
@@ -27,6 +32,7 @@ export class AnimalsComponent implements OnInit {
     let checked = []
     this.animals.forEach(animal => {
       if (animal.checked) {
+        animal.status = "SOLD"
         checked.push("resource:org.cattle.tracker.Animal#" + animal.rfid)
       }
     })
@@ -38,5 +44,19 @@ export class AnimalsComponent implements OnInit {
         console.log(res)
       }
     )
+  }
+
+  listForSale() {
+    this.animals = this.allAnimals.filter(animal => {
+      return animal.status === 'FOR_SALE'
+    })
+    this.listingSold = false;
+  }
+
+  listSold() {
+    this.animals = this.allAnimals.filter(animal => {
+      return animal.status === 'SOLD'
+    })
+    this.listingSold = true;
   }
 }

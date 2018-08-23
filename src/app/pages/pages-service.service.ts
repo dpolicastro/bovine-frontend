@@ -26,4 +26,14 @@ export class PagesServiceService {
     return this.http.post(url, body)
 
   }
+
+  resetAnimals() {
+    const url = 'http://35.192.118.99:3000/api/org.cattle.tracker.Reset'
+    return this.http.post(url, {});
+  }
+
+  getContracts() {
+    const url = 'http://35.192.118.99:3000/api/org.cattle.tracker.Contract'
+    return this.http.get(url);
+  }
 }

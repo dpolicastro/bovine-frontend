@@ -1,14 +1,19 @@
 <div class="mt-3">
   <h3>Available
-    <button (click)="getContract(template)" class="btn btn-success float-right mb-3">
+    <button [disabled]="listingSold" (click)="getContract(template)" class="btn btn-success float-right mb-3">
       Checkout
     </button>
-
+    <button (click)="listForSale()" class="btn btn-primary mr-3 float-right mb-3">
+      FOR_SALE
+    </button>
+    <button (click)="listSold(template)" class="btn btn-primary mr-3 float-right mb-3">
+      SOLD
+    </button>
   </h3>
   <table class="table table-striped">
     <tr>
       <th>RFID</th>
-      <th>Weight</th>
+      <th>Weight (KG)</th>
       <th>Scale</th>
       <th>Status</th>
       <th>Info</th>
@@ -16,12 +21,13 @@
     </tr>
     <tr *ngFor="let animal of animals;let i = index;">
       <td>{{animal.rfid}}</td>
-      <td>{{animal.weight}}</td>
+      <td>{{animal.weight.toFixed(2)}}</td>
       <td>{{animal.scale}}</td>
       <td>{{animal.status}}</td>
       <td></td>
       <td>
-        <input class="form-control" type="checkbox" name="options" value="animal" [(ngModel)]="animals[i].checked" />
+        <input [disabled]="animal.status === 'SOLD'" class="form-control" type="checkbox" name="options" value="animal" [(ngModel)]="animals[i].checked"
+        />
       </td>
     </tr>
   </table>
@@ -36,13 +42,7 @@
       </button>
     </div>
     <div class="modal-body">
-      From: {{ transaction.farm }}
-      <hr>
-      To: {{ transaction.fridge }}
-      <hr>
-      Animals: {{ transaction.animals | json}}
-      <hr>
-      TxId: {{ transaction.transactionId }}
+      Contract Created!
     </div>
   </div>
 
