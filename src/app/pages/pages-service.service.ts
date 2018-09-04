@@ -8,13 +8,15 @@ export class PagesServiceService {
 
   constructor(private http: HttpClient) { }
 
+  private baseIp: string = '35.225.252.241'
+
   getAnimals() {
-    const url = 'http://35.192.118.99:3000/api/org.cattle.tracker.Animal'
+    const url = `http://${this.baseIp}:3000/api/org.cattle.tracker.Animal`
     return this.http.get(url);
   }
 
   getContract(animals: any[]) {
-    const url = 'http://35.192.118.99:3000/api/org.cattle.tracker.CreateContract'
+    const url = `http://${this.baseIp}:3000/api/org.cattle.tracker.CreateContract`
     const body = {
       $class: "org.cattle.tracker.CreateContract",
       animals: animals,
@@ -28,12 +30,12 @@ export class PagesServiceService {
   }
 
   resetAnimals() {
-    const url = 'http://35.192.118.99:3000/api/org.cattle.tracker.Reset'
+    const url = `http://${this.baseIp}:3000/api/org.cattle.tracker.Reset`
     return this.http.post(url, {});
   }
 
   getContracts() {
-    const url = 'http://35.192.118.99:3000/api/org.cattle.tracker.Contract'
+    const url = `http://${this.baseIp}:3000/api/org.cattle.tracker.Contract`
     return this.http.get(url);
   }
 }
